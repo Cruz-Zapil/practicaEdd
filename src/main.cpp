@@ -7,6 +7,7 @@
 #include "Turno.h"
 #include "tinyfiledialogs.h"
 #include "ListaPalabra.h"
+#include "Jugar.h"
 
 
 using namespace std;
@@ -15,10 +16,10 @@ int main()
 {
     ///Juego
 
-    do{
-
+    
         /// Menu principal
         int opcion=0;
+        Jugar juego;
 
 
         cout << "***************************" << endl;
@@ -35,7 +36,9 @@ int main()
         switch(opcion){
             case 1:
                 cout << "Jugar" << endl;
-
+                juego.crearJugadores();
+                juego.lecturaArchivo();
+                juego.dividirFichas();
 
                 break;
             case 2:
@@ -51,7 +54,7 @@ int main()
                 break;
         }
 
-    } while();
+    
 
     return 0;
 }

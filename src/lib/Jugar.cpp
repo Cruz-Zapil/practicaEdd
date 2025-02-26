@@ -13,7 +13,6 @@
 
 void Jugar::crearJugadores()
 {
-
     string nombre;
 
     do
@@ -23,14 +22,12 @@ void Jugar::crearJugadores()
 
         if (cantJugadores >= 2)
         {
-
             for (int i = 0; i < cantJugadores; i++)
             {
                 cout << "Jugador " << i + 1 << endl;
                 cout << "Ingrese su nombre: ";
                 cin >> nombre;
 
-                
                 listTurno.encolar(new Persona(nombre, 0));
             }
         }
@@ -41,9 +38,6 @@ void Jugar::crearJugadores()
 
     } while (cantJugadores < 2);
 }
-
-
-
 
 void Jugar::lecturaArchivo()
 {
@@ -92,8 +86,8 @@ void Jugar::lecturaArchivo()
     {
         cout << "No se seleccionó ningún archivo." << endl;
     }
+    
 }
-
 
 void Jugar::dividirFichas()
 {
@@ -142,10 +136,16 @@ void Jugar::dividirFichas()
                 cout << " Error: NodoTurno no tiene un jugador asociado." << endl;
             }
             listTurno.moverFrenteFinal(); // Avanzar turno
+            jugador->mostrar();
+            jugador->imprimirFichas();
+            
         }
         else
         {
             cout << " Error: La cola de turnos está vacía." << endl;
         }
     }
+
+
+    cout << "Fichas restantes: " << listaFicha.getSize() << endl;
 }

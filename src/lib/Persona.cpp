@@ -23,7 +23,7 @@ void Persona::imprimirFichas() {
     listFicha->imprimir();
 }
 
-Ficha *Persona::buscarFicha(string letra) {
+Ficha *Persona::buscarFicha(char letra) {
     return listFicha->buscar(letra);
 }
 

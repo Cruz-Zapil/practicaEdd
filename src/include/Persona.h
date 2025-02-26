@@ -26,7 +26,7 @@ class Persona{
         void eliminarFicha(Ficha *ficha);
         void imprimirFichas();
         
-        Ficha *buscarFicha(string letra);
+        Ficha *buscarFicha(char letra);
 
 
         void setPunteo(int p);

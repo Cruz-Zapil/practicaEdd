@@ -106,6 +106,9 @@ class ListFicha {
 
         };
 
+        NodoListFicha *getPrimero(){
+            return this->primero;
+        };
 
         int getSize(){
             return this->size;            

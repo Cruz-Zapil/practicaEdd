@@ -16,9 +16,6 @@ void Jugar::crearJugadores()
 
     string nombre;
 
-    cout << " Ingrese la cantidad de jugadores: ";
-    cin >> cantJugadores;
-
     do
     {
         cout << " Ingrese la cantidad de Jugadores: " << endl;
@@ -33,7 +30,8 @@ void Jugar::crearJugadores()
                 cout << "Ingrese su nombre: ";
                 cin >> nombre;
 
-                listTurno.encolar(Persona(nombre, 0));
+                
+                listTurno.encolar(new Persona(nombre, 0));
             }
         }
         else
@@ -43,6 +41,9 @@ void Jugar::crearJugadores()
 
     } while (cantJugadores < 2);
 }
+
+
+
 
 void Jugar::lecturaArchivo()
 {
@@ -70,18 +71,16 @@ void Jugar::lecturaArchivo()
             string palabra;
 
             while (getline(ss, palabra, ','))
-            { 
+            {
                 /// guardar las palabras
                 listaPalabra.insertar(palabra);
 
                 /// guardar las fichas en una lista
                 for (char letra : palabra)
                 {
-                    listaFicha.insertar( new Ficha(letra));
+                    listaFicha.insertar(new Ficha(letra));
                 }
             }
-
-           
         }
 
         listaPalabra.imprimir();
@@ -95,27 +94,58 @@ void Jugar::lecturaArchivo()
     }
 }
 
-void Jugar::dividirFichas(){
 
+void Jugar::dividirFichas()
+{
     int cantFichas = listaFicha.getSize() / cantJugadores;
     int resto = listaFicha.getSize() % cantJugadores;
 
-    for (int i=0; i<cantJugadores; i++){
+    for (int i = 0; i < cantJugadores; i++)
+    {
+        ListFicha *listaFichaPorJuagador = new ListFicha(); // Lista para cada jugador
 
-        for (int j=0; j<cantFichas; j++){
-
-
-
-            listTurno.getFrente()->insertarFichas(listaFicha);
+        // Asignar fichas equitativamente
+        for (int j = 0; j < cantFichas; j++)
+        {
+            NodoListFicha *nodo = listaFicha.getPrimero();
+            if (nodo)
+            {
+                Ficha *ficha = nodo->ficha;
+                listaFichaPorJuagador->insertar(ficha);
+                listaFicha.eliminar(ficha);
+            }
         }
 
-        if (resto > 0){
-            listTurno.verFrente().insertarFichas(listaFicha);
+        // Asignar fichas extras si hay un resto
+        if (resto > 0 && listaFicha.getSize() > 0)
+        {
+            NodoListFicha *nodoExtra = listaFicha.getPrimero();
+            Ficha *fichaExtra = nodoExtra->ficha;
+            listaFichaPorJuagador->insertar(fichaExtra);
+            listaFicha.eliminar(fichaExtra);
             resto--;
         }
 
-        listTurno.desencolar();
+        // Obtener el jugador del turno actual
+        NodoTurno *turnoActual = listTurno.getFrente();
+
+        if (turnoActual)
+        {
+            Persona *jugador = turnoActual->jugador;
+
+            if (jugador)
+            {
+                jugador->insertarFichas(listaFichaPorJuagador);
+            }
+            else
+            {
+                cout << " Error: NodoTurno no tiene un jugador asociado." << endl;
+            }
+            listTurno.moverFrenteFinal(); // Avanzar turno
+        }
+        else
+        {
+            cout << " Error: La cola de turnos está vacía." << endl;
+        }
     }
-
-
 }

@@ -1,15 +1,13 @@
 #include "Ficha.h"
 
-Ficha::Ficha( char l){
+Ficha::Ficha( char letra){
     valor = setValor();
-    letra = l;
+    this->letra = letra;
 
 }
 
-
 int Ficha::setValor(){
     /// seleccinar un valor 
-     
     int valor  = rand() % 15;
     return valor;  
 
@@ -19,8 +17,8 @@ int Ficha::getValor(){
     return valor;
 }
 
-void Ficha::setLetra(char l){
-    letra = l;
+void Ficha::setLetra(char letra){
+    this->letra = letra;
 }
 
 char Ficha::getLetra(){

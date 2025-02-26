@@ -9,11 +9,14 @@ class NodoTurno
 {
 
 public:
-
-    Persona dato;
+    Persona *jugador;
     NodoTurno *siguiente;
 
-    NodoTurno(Persona dato) : dato(dato), siguiente(nullptr) {}
+    NodoTurno(Persona *_jugador)
+    {
+        jugador = _jugador;
+        siguiente = nullptr;
+    }
 };
 
 class Turno
@@ -27,7 +30,7 @@ public:
     Turno() : frente(nullptr), finalCola(nullptr) {}
 
     // Método para encolar un objeto Persona
-    void encolar(const Persona &persona)
+    void encolar(Persona *persona)
     {
         NodoTurno *nuevo = new NodoTurno(persona);
         if (finalCola)
@@ -58,9 +61,21 @@ public:
         delete temp;
     }
 
+    // metodo para obtener el jugador:
+
+    Persona *getJugador()
+    {
+        if (esVacia())
+        {
+            cout << "La cola está vacía" << endl;
+            return nullptr;
+        }
+        return frente->jugador;
+    }
+
     // Método para ver obtener el frente de la cola y desplazarlo al final
 
-    NodoTurno* getFrente()
+    NodoTurno *getFrente()
     {
         if (esVacia())
         {
@@ -95,7 +110,6 @@ public:
         finalCola = temp;            // Actualizamos el final de la cola
     }
 
-
     // Método para verificar si la cola está vacía
     bool esVacia() const
     {
@@ -108,7 +122,10 @@ public:
         NodoTurno *actual = frente;
         while (actual)
         {
-            actual->dato.mostrar();
+            if (actual->jugador)
+            {
+                actual->jugador->mostrar();
+            }
             actual = actual->siguiente;
         }
     }

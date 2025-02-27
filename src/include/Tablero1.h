@@ -3,13 +3,16 @@
 #define TABLERO_H
 
 #include <iostream>
-#include "Casilla.h"
+
+
 #include "Ficha.h"
 
 using namespace std;
 
 class NodoCasilla {
+
 public:
+
     Ficha *contenido;
     bool bloqueado;
     bool ocupado;
@@ -30,6 +33,7 @@ public:
 };
 
 class Tablero {
+
 private:
     NodoCasilla* inicio;
     int filas=15, columnas=15;

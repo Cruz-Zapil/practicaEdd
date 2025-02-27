@@ -11,8 +11,26 @@
 #include "Turno.h"
 #include "ListaFicha.h"
 
-void Jugar::crearJugadores()
-{
+
+using namespace std;
+
+void Jugar::jugar(){
+
+    crearJugadores();
+    lecturaArchivo();
+    dividirFichas();
+
+    
+    tablero.construirTablero();
+    tablero.bloquearCasillas();
+
+    tablero.imprimirTablero();
+    turnoJugador();
+
+}
+
+
+void Jugar::crearJugadores(){
     string nombre;
 
     do
@@ -77,9 +95,6 @@ void Jugar::lecturaArchivo()
             }
         }
 
-        listaPalabra.imprimir();
-        listaFicha.imprimir();
-
         file.close(); // Cierra el archivo
     }
     else
@@ -135,9 +150,11 @@ void Jugar::dividirFichas()
             {
                 cout << " Error: NodoTurno no tiene un jugador asociado." << endl;
             }
+
+
             listTurno.moverFrenteFinal(); // Avanzar turno
-            jugador->mostrar();
-            jugador->imprimirFichas();
+          //  jugador->mostrar();
+          //  jugador->imprimirFichas();
             
         }
         else
@@ -146,6 +163,38 @@ void Jugar::dividirFichas()
         }
     }
 
-
     cout << "Fichas restantes: " << listaFicha.getSize() << endl;
 }
+
+
+///turno de jugadores 
+
+void Jugar::turnoJugador(){
+
+    NodoTurno *turnoActual = listTurno.getFrente();
+
+    if (turnoActual)
+    {
+        Persona *jugador = turnoActual->jugador;
+        if (jugador)
+        {
+            cout << "Turno de " << jugador->getNombre() << endl;
+            jugador->imprimirFichas();
+            cout << "Seleccione una ficha: ";
+            char letra;
+            cin >> letra;
+
+        }
+        else
+        {
+            cout << " Error: NodoTurno no tiene un jugador asociado." << endl;
+        }
+    }
+    else
+    {
+        cout << " Error: La cola de turnos está vacía." << endl;
+    }
+}
+
+
+/// mostrar turno 

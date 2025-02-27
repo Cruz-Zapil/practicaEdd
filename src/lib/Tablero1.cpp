@@ -9,17 +9,25 @@ Tablero::Tablero() {
 }
 
 void Tablero::construirTablero() {
+
     inicio = new NodoCasilla();
+
     NodoCasilla *filaActual = inicio;
+
     for (int i = 0; i < filas; i++) {
+
         NodoCasilla *columnaActual = filaActual;
+
         for (int j = 1; j < columnas; j++) {
+
             NodoCasilla *nuevo = new NodoCasilla();
+
             columnaActual->derecha = nuevo;
             nuevo->izquierda = columnaActual;
             columnaActual = nuevo;
         }
         if (i < filas - 1) {
+
             NodoCasilla *nuevaFila = new NodoCasilla();
             filaActual->abajo = nuevaFila;
             nuevaFila->arriba = filaActual;
@@ -35,16 +43,21 @@ void Tablero::bloquearCasillas() {
     while (contador < cant) {
         int x = rand() % filas;
         int y = rand() % columnas;
+
         NodoCasilla *casilla = getCasilla(x, y);
         if (casilla && !casilla->bloqueado) {
+
             casilla->bloqueado = true;
             contador++;
+
         }
     }
 }
 
 NodoCasilla* Tablero::getCasilla(int x, int y) {
+
     NodoCasilla *temp = inicio;
+
     for (int i = 0; i < x; i++) {
         if (temp->abajo) temp = temp->abajo;
         else return nullptr;
@@ -65,15 +78,40 @@ void Tablero::setFicha(int x, int y, Ficha *ficha) {
 }
 
 void Tablero::imprimirTablero() {
+    int contadorF=1;
+    
+
     NodoCasilla *filaActual = inicio;
+
+    cout <<"   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15"<<endl;
     while (filaActual) {
+
+        if (contadorF<10){
+            cout << contadorF<<" ";
+
+        }else {
+            cout << contadorF;
+        }
+
         NodoCasilla *columnaActual = filaActual;
         while (columnaActual) {
-            if (columnaActual->bloqueado) cout << "[X] ";
-            else if (columnaActual->ocupado) cout << "[F] ";
-            else cout << "[ ] ";
+
+         
+            if (columnaActual->bloqueado)
+            {
+                cout << "[█] ";
+            } 
+            else if (columnaActual->ocupado){
+                cout << "[F] ";
+            }else {
+                cout << "[ ] ";
+            }
+            
             columnaActual = columnaActual->derecha;
+            
         }
+        contadorF++;
+
         cout << endl;
         filaActual = filaActual->abajo;
     }

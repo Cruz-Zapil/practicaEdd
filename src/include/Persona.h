@@ -21,8 +21,7 @@ class Persona{
 
         void mostrar();
         void insertarFichas(ListFicha *listaFichas);
-
-
+        ListFicha *getFichas();
         void eliminarFicha(Ficha *ficha);
         void imprimirFichas();
         

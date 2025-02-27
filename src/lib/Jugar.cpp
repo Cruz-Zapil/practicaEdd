@@ -11,26 +11,24 @@
 #include "Turno.h"
 #include "ListaFicha.h"
 
-
 using namespace std;
 
-void Jugar::jugar(){
+void Jugar::jugar()
+{
 
     crearJugadores();
     lecturaArchivo();
     dividirFichas();
 
-    
     tablero.construirTablero();
     tablero.bloquearCasillas();
 
     tablero.imprimirTablero();
     turnoJugador();
-
 }
 
-
-void Jugar::crearJugadores(){
+void Jugar::crearJugadores()
+{
     string nombre;
 
     do
@@ -101,7 +99,6 @@ void Jugar::lecturaArchivo()
     {
         cout << "No se seleccionó ningún archivo." << endl;
     }
-    
 }
 
 void Jugar::dividirFichas()
@@ -121,6 +118,7 @@ void Jugar::dividirFichas()
             {
                 Ficha *ficha = nodo->ficha;
                 listaFichaPorJuagador->insertar(ficha);
+                listaFichaPorJuagador->ordenarLista();
                 listaFicha.eliminar(ficha);
             }
         }
@@ -151,11 +149,9 @@ void Jugar::dividirFichas()
                 cout << " Error: NodoTurno no tiene un jugador asociado." << endl;
             }
 
-
             listTurno.moverFrenteFinal(); // Avanzar turno
-          //  jugador->mostrar();
-          //  jugador->imprimirFichas();
-            
+                                          //  jugador->mostrar();
+                                          //  jugador->imprimirFichas();
         }
         else
         {
@@ -166,35 +162,67 @@ void Jugar::dividirFichas()
     cout << "Fichas restantes: " << listaFicha.getSize() << endl;
 }
 
+/// turno de jugadores
 
-///turno de jugadores 
-
-void Jugar::turnoJugador(){
-
+void Jugar::turnoJugador()
+{
     NodoTurno *turnoActual = listTurno.getFrente();
 
     if (turnoActual)
     {
         Persona *jugador = turnoActual->jugador;
+
         if (jugador)
         {
-            cout << "Turno de " << jugador->getNombre() << endl;
-            jugador->imprimirFichas();
-            cout << "Seleccione una ficha: ";
-            char letra;
-            cin >> letra;
+            cout << "Turno de " << jugador->getNombre() <<", Con un Punteo de: "<< jugador->getPunteo() << endl;
+            cout <<" Sus fichas son: "<<endl;
 
+            if (jugador->getFichas()->getSize() != 0){
+
+                jugador->imprimirFichas();
+                cout << "Seleccione una ficha: ";
+                char letra;
+                cin >> letra;
+
+                Ficha *ficha = jugador->buscarFicha(letra);
+
+                if (ficha)
+                {
+                    cout << "Ficha seleccionada: " << ficha->getLetra() << endl;
+                    cout << "Ingrese la posición (x, y): ";
+                    int x, y;
+                    cin >> x >> y;
+
+                    if (tablero.setFicha(x, y, ficha))
+                    { 
+                        jugador->getFichas()->eliminar(ficha);
+                        /// analizar palabra
+
+                    }
+
+                    tablero.imprimirTablero();
+                    listTurno.moverFrenteFinal(); // Avanzar turno
+                }
+                else
+                {
+                    cout << " Error: Ficha no encontrada." << endl;
+                }
+            }
+            else
+            {
+                cout << " Error: NodoTurno no tiene un jugador asociado." << endl;
+            }
         }
         else
         {
-            cout << " Error: NodoTurno no tiene un jugador asociado." << endl;
+            cout << " Error: La cola de turnos está vacía." << endl;
         }
     }
     else
     {
-        cout << " Error: La cola de turnos está vacía." << endl;
+        cout << " Error: El jugador no tiene fichas." << endl;
+        listTurno.moverFrenteFinal(); // Avanzar turno
     }
 }
 
-
-/// mostrar turno 
+/// mostrar turno

@@ -14,6 +14,10 @@ void Persona::insertarFichas(ListFicha *listFichas) {
     listFicha = listFichas;
 }
 
+ListFicha *Persona::getFichas() {
+    return listFicha;
+}
+
 void Persona::eliminarFicha(Ficha *ficha) {
     listFicha->eliminar(ficha);
 }

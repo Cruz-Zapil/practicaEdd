@@ -43,7 +43,7 @@ public:
     void construirTablero();
     void bloquearCasillas();
     NodoCasilla* getCasilla(int x, int y);
-    void setFicha(int x, int y, Ficha *ficha);
+    bool setFicha(int x, int y, Ficha *ficha);
     void imprimirTablero();
 };
 

@@ -69,21 +69,27 @@ NodoCasilla* Tablero::getCasilla(int x, int y) {
     return temp;
 }
 
-void Tablero::setFicha(int x, int y, Ficha *ficha) {
+bool Tablero::setFicha(int x, int y, Ficha *ficha) {
+
     NodoCasilla *casilla = getCasilla(x, y);
     if (casilla && !casilla->bloqueado && !casilla->ocupado) {
         casilla->contenido = ficha;
         casilla->ocupado = true;
+        return true;
+    }else {
+        cout << "Casilla bloqueada o ocupada" << endl;
     }
+    return false;
+
 }
 
 void Tablero::imprimirTablero() {
-    int contadorF=1;
+    int contadorF=0;
     
 
     NodoCasilla *filaActual = inicio;
 
-    cout <<"   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15"<<endl;
+    cout <<"   0   1   2   3   4   5   6   7   8   9   10  11  12  13  14"<<endl;
     while (filaActual) {
 
         if (contadorF<10){
@@ -102,7 +108,7 @@ void Tablero::imprimirTablero() {
                 cout << "[█] ";
             } 
             else if (columnaActual->ocupado){
-                cout << "[F] ";
+                cout << "["<<columnaActual->contenido->getLetra()<<"] ";
             }else {
                 cout << "[ ] ";
             }

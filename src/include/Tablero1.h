@@ -37,6 +37,8 @@ class Tablero {
 private:
     NodoCasilla* inicio;
     int filas=15, columnas=15;
+    int punteoV=0;
+    int punteoH=0;
 
 public:
     Tablero();
@@ -45,6 +47,11 @@ public:
     NodoCasilla* getCasilla(int x, int y);
     bool setFicha(int x, int y, Ficha *ficha);
     void imprimirTablero();
+    string analizarH(int x, int y);
+    string analizarV(int x, int y);
+    int getPunteoH();
+    int getPunteoV();
+    
 };
 
 #endif

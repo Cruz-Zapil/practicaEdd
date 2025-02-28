@@ -24,7 +24,16 @@ void Jugar::jugar()
     tablero.bloquearCasillas();
 
     tablero.imprimirTablero();
-    turnoJugador();
+
+
+    do{
+            turnoJugador();
+    }while (listTurno.jugadoresConFichas());
+
+    cout << "Fin del juego" << endl;
+    cout << "punteos:"<<endl;
+    listTurno.imprimir();
+
 }
 
 void Jugar::crearJugadores()
@@ -118,7 +127,7 @@ void Jugar::dividirFichas()
             {
                 Ficha *ficha = nodo->ficha;
                 listaFichaPorJuagador->insertar(ficha);
-                listaFichaPorJuagador->ordenarLista();
+                listaFichaPorJuagador->ordenarListAlfabe();
                 listaFicha.eliminar(ficha);
             }
         }
@@ -197,7 +206,16 @@ void Jugar::turnoJugador()
                     { 
                         jugador->getFichas()->eliminar(ficha);
                         /// analizar palabra
+                        string tmpPalabraH= tablero.analizarH(x, y);
+                        string tmpPalabraV= tablero.analizarV(x, y);
 
+                        if ( listaPalabra.buscar(tmpPalabraH)){
+                            jugador->setPunteo(tablero.getPunteoH());
+                        }
+
+                        if ( listaPalabra.buscar(tmpPalabraV)){
+                            jugador->setPunteo(tablero.getPunteoV());
+                        }
                     }
 
                     tablero.imprimirTablero();

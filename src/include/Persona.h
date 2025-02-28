@@ -14,6 +14,7 @@ class Persona{
         string nombre;
         int punteo;
         ListFicha* listFicha;
+        bool conFicha;
 
 
     public:
@@ -24,6 +25,7 @@ class Persona{
         ListFicha *getFichas();
         void eliminarFicha(Ficha *ficha);
         void imprimirFichas();
+        bool getConFicha();
         
         Ficha *buscarFicha(char letra);
 

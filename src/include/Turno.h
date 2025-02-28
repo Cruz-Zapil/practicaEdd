@@ -29,6 +29,8 @@ private:
 public:
     Turno() : frente(nullptr), finalCola(nullptr) {}
 
+
+
     // Método para encolar un objeto Persona
     void encolar(Persona *persona)
     {
@@ -73,7 +75,24 @@ public:
         return frente->jugador;
     }
 
+    /// metodo para ver si los jugadores tienen fichas
+
+    bool jugadoresConFichas()
+    {
+        NodoTurno *actual = frente;
+        while (actual)
+        {
+            if (actual->jugador->getConFicha())
+            {
+                return true;
+            }
+            actual = actual->siguiente;
+        }
+        return false;
+    }
+
     // Método para ver obtener el frente de la cola y desplazarlo al final
+
 
     NodoTurno *getFrente()
     {

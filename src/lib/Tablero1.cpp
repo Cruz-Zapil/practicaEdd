@@ -122,3 +122,44 @@ void Tablero::imprimirTablero() {
         filaActual = filaActual->abajo;
     }
 }
+
+string Tablero::analizarH(int x, int y) {
+
+    string palabra;
+    punteoH = 0;
+    NodoCasilla* inicio = getCasilla(x, y);
+
+    while (inicio && inicio->izquierda && inicio->izquierda->contenido) {
+        inicio = inicio->izquierda;
+    }
+
+      while (inicio && inicio->contenido) {
+        palabra+= inicio->contenido->getLetra();
+        punteoH += inicio->contenido->getValor();
+        inicio = inicio->derecha;
+    }
+    cout<< " Palabra Horizontal : "<< palabra<<endl;
+    return palabra;
+}
+
+
+string Tablero::analizarV(int x, int y) {
+
+    string palabra;
+    punteoV = 0;
+    NodoCasilla* inicio = getCasilla(x, y);
+
+    while (inicio && inicio->arriba && inicio->arriba->contenido) {
+        inicio = inicio->arriba;
+    }
+
+      while (inicio && inicio->contenido) {
+        palabra+= inicio->contenido->getLetra();
+        punteoV += inicio->contenido->getValor();
+        inicio = inicio->abajo;
+    }
+
+
+    cout<< " Palabra Vertical : "<< palabra<<endl;
+    return palabra;
+}

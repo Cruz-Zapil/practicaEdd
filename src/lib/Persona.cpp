@@ -46,3 +46,12 @@ string Persona::getNombre() {
     return nombre;
 }
 
+bool Persona::getConFicha() {
+
+    if (listFicha->getSize() == 0) {
+        conFicha = false;
+    } else {
+        conFicha = true;
+    }
+   return conFicha;
+}

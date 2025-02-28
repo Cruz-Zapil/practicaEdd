@@ -163,3 +163,11 @@ string Tablero::analizarV(int x, int y) {
     cout<< " Palabra Vertical : "<< palabra<<endl;
     return palabra;
 }
+
+int Tablero::getPunteoH() {
+    return punteoH;
+}
+
+int Tablero::getPunteoV() {
+    return punteoV;
+}

@@ -13,41 +13,46 @@ using namespace std;
 
 int main()
 {
-    /// Juego
-
     /// Menu principal
-    int opcion = 0;
-    Jugar juego;
+    bool salir = false;
+    do
+    {   
+        /// Menu principal
+        int opcion = 0;
+        Jugar juego;
 
-    cout << "***************************" << endl;
-    cout << "** Bienvenido a Ahorcado **" << endl;
-    cout << "***************************" << endl;
-    cout << "Seleccione una opcion" << endl;
+        cout << "***************************" << endl;
+        cout << "** Bienvenido a Scrabble **" << endl;
+        cout << "***************************" << endl;
+        cout << "Seleccione una opcion" << endl;
 
-    cout << "1. Jugar" << endl;
-    cout << "2. Instrucciones" << endl;
-    cout << "3. Salir" << endl;
+        cout << "1. Jugar" << endl;
+        cout << "2. Instrucciones" << endl;
+        cout << "3. Salir" << endl;
 
-    cin >> opcion;
+        cin >> opcion;
 
-    switch (opcion)
-    {
-    case 1:
-        cout << "Jugar" << endl;
-        juego.jugar();
+        switch (opcion)
+        {
+        case 1:
+            cout << "Jugar" << endl;
+            juego.jugar();
 
-        break;
-    case 2:
-        cout << "Instrucciones" << endl;
+            break;
+        case 2:
+            cout << "Instrucciones" << endl;
 
-        break;
-    case 3:
-        cout << "Salir" << endl;
-        break;
-    default:
-        cout << "Opcion no valida" << endl;
-        break;
-    }
+            break;
+        case 3:
+            cout << "Salir" << endl;
+            salir = true;
+            break;
+        default:
+            cout << "Opcion no valida" << endl;
+            break;
+        }
+
+    } while (!salir);
 
     return 0;
 }

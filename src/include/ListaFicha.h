@@ -37,17 +37,19 @@ public:
         this->size = 0;
     };
 
+    /// Metodo para ingresar una ficha
+    /// complegidad algoritmica O(n)
     void insertar(Ficha *ficha)
     {
 
-        NodoListFicha *nuevo = new NodoListFicha(ficha);
+        NodoListFicha *nuevo = new NodoListFicha(ficha); /// O(1)
 
-        if (this->primero == NULL)
+        if (this->primero == NULL) /// O(1)
         {
             this->primero = nuevo;
             this->ultimo = nuevo;
         }
-        else
+        else /// O(1)
         {
             this->ultimo->siguiente = nuevo;
             this->ultimo = nuevo;
@@ -55,20 +57,22 @@ public:
         this->size++;
     };
 
+    /// Metodo para eliminar una ficha
+    /// complegidad algoritmica O(n)
     void eliminar(Ficha *ficha)
     {
         NodoListFicha *actual = this->primero;
         NodoListFicha *anterior = NULL;
 
-        while (actual != NULL)
+        while (actual != NULL) /// O(n)
         {
-            if (actual->ficha == ficha)
+            if (actual->ficha == ficha) /// O(1)
             {
-                if (anterior == NULL)
+                if (anterior == NULL) /// O(1)
                 {
                     this->primero = actual->siguiente;
                 }
-                else
+                else /// O(1)
                 {
                     anterior->siguiente = actual->siguiente;
                 }
@@ -87,7 +91,7 @@ public:
 
         while (actual != NULL)
         {
-            cout << actual->ficha->getLetra() << "--> "<< actual->ficha->getValor() <<endl;
+            cout << actual->ficha->getLetra() << "--> " << actual->ficha->getValor() << endl;
             actual = actual->siguiente;
         }
         cout << endl;
@@ -119,23 +123,24 @@ public:
         return this->size;
     };
 
-   
-   /// bubble Sort
+    /// bubble Sort
+    /// complegidad algoritmica O(n²)
+    // es simple y rapido simpre y cuando las lista no son demasiado Grandes
+
     void ordenarListAlfabe()
     {
         if (this->primero == nullptr || this->primero->siguiente == nullptr)
         {
             return; // Lista vacía o con un solo elemento, ya está ordenada
         }
-
         bool cambiado;
-        do     /// O(n)
+        do /// O(n)
         {
             cambiado = false;
             NodoListFicha *actual = this->primero;
             NodoListFicha *siguiente = actual->siguiente;
 
-            while (siguiente != nullptr)    /// O(n)
+            while (siguiente != nullptr) /// O(n)
             {
                 if (actual->ficha->getLetra() > siguiente->ficha->getLetra())
                 {
@@ -151,10 +156,6 @@ public:
             }
         } while (cambiado);
     };
-
-/// complegidad algoritmica O(n²) 
-// es simple y rapido simpre y cuando las lista no son demasiado Grandes 
-
 };
 
 #endif

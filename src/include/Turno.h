@@ -32,6 +32,8 @@ public:
 
 
     // Método para encolar un objeto Persona
+
+    /// complegidad  O(1)
     void encolar(Persona *persona)
     {
         NodoTurno *nuevo = new NodoTurno(persona);
@@ -105,16 +107,17 @@ public:
     }
 
     /// metodo para mover el frente al final
-
+    
+    /// Complejidad O(1)
     void moverFrenteFinal()
     {
-        if (esVacia())
+        if (esVacia())  /// O(1)
         {
             cout << "La cola está vacía" << endl;
             return;
         }
 
-        if (frente == finalCola)
+        if (frente == finalCola)  /// O(1)
         {
             cout << "Solo hay un elemento, no se mueve" << endl;
             return;
@@ -128,6 +131,8 @@ public:
         finalCola->siguiente = temp; // Conectamos el último nodo con el nuevo nodo final
         finalCola = temp;            // Actualizamos el final de la cola
     }
+
+
 
     // Método para verificar si la cola está vacía
     bool esVacia() const

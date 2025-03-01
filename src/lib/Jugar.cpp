@@ -40,18 +40,18 @@ void Jugar::crearJugadores()
 {
     string nombre;
 
-    do
+    do                     /// O(n)
     {
         cout << " Ingrese la cantidad de Jugadores: " << endl;
         cin >> cantJugadores;
 
         if (cantJugadores >= 2)
         {
-            for (int i = 0; i < cantJugadores; i++)
+            for (int i = 0; i < cantJugadores; i++)         ///O(n)
             {
                 cout << "Jugador " << i + 1 << endl;
                 cout << "Ingrese su nombre: ";
-                cin >> nombre;
+                cin >> nombre;                             /// O(1)
 
                 listTurno.encolar(new Persona(nombre, 0));
             }
@@ -63,6 +63,9 @@ void Jugar::crearJugadores()
 
     } while (cantJugadores < 2);
 }
+/// Caso optimo O(n)
+/// Caso peor O(n)
+
 
 void Jugar::lecturaArchivo()
 {
@@ -112,6 +115,9 @@ void Jugar::lecturaArchivo()
 
 void Jugar::dividirFichas()
 {
+
+    listaFicha.ordenarListAlfabe();
+
     int cantFichas = listaFicha.getSize() / cantJugadores;
     int resto = listaFicha.getSize() % cantJugadores;
 

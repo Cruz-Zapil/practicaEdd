@@ -10,8 +10,6 @@ class Ficha{
         int valor;
         char letra;
         
-
-
     public:
 
         Ficha( char letra );

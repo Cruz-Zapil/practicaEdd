@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/home/CruzZapil/Escritorio/Practica_EDD/build",
-  "command": "/usr/bin/c++  -I/home/CruzZapil/Escritorio/Practica_EDD/include -g -std=gnu++17 -o CMakeFiles/main.dir/src/main.cpp.o -c /home/CruzZapil/Escritorio/Practica_EDD/src/main.cpp",
-  "file": "/home/CruzZapil/Escritorio/Practica_EDD/src/main.cpp",
-  "output": "CMakeFiles/main.dir/src/main.cpp.o"
-}
-]

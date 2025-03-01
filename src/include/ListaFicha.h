@@ -120,6 +120,7 @@ public:
     };
 
    
+   /// bubble Sort
     void ordenarListAlfabe()
     {
         if (this->primero == nullptr || this->primero->siguiente == nullptr)
@@ -128,13 +129,13 @@ public:
         }
 
         bool cambiado;
-        do
+        do     /// O(n)
         {
             cambiado = false;
             NodoListFicha *actual = this->primero;
             NodoListFicha *siguiente = actual->siguiente;
 
-            while (siguiente != nullptr)
+            while (siguiente != nullptr)    /// O(n)
             {
                 if (actual->ficha->getLetra() > siguiente->ficha->getLetra())
                 {
@@ -151,6 +152,8 @@ public:
         } while (cambiado);
     };
 
+/// complegidad algoritmica O(n²) 
+// es simple y rapido simpre y cuando las lista no son demasiado Grandes 
 
 };
 

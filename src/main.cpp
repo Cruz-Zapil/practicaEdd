@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <limits>
 
 #include "Persona.h"
 #include "Turno.h"
@@ -31,6 +32,14 @@ int main()
         cout << "3. Salir" << endl;
 
         cin >> opcion;
+
+           // Manejo de error por entrada no numérica
+        if (cin.fail()) {
+            cin.clear();  // Limpia el estado de error
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');  
+            cout << "Entrada no válida. Por favor, ingrese un número entre 1 y 3." << endl;
+            continue;  
+        }
 
         switch (opcion)
         {

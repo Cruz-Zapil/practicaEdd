@@ -125,6 +125,8 @@ void Tablero::imprimirTablero() {
 
 string Tablero::analizarH(int x, int y) {
 
+    
+
     string palabra;
     punteoH = 0;
     NodoCasilla* inicio = getCasilla(x, y);

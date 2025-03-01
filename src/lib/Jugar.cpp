@@ -25,33 +25,32 @@ void Jugar::jugar()
 
     tablero.imprimirTablero();
 
-
-    do{
-            turnoJugador();
-    }while (listTurno.jugadoresConFichas());
+    do
+    {
+        turnoJugador();
+    } while (listTurno.jugadoresConFichas());
 
     cout << "Fin del juego" << endl;
-    cout << "punteos:"<<endl;
+    cout << "punteos:" << endl;
     listTurno.imprimir();
-
 }
 
 void Jugar::crearJugadores()
 {
     string nombre;
 
-    do                     /// O(n)
+    do /// O(n)
     {
         cout << " Ingrese la cantidad de Jugadores: " << endl;
         cin >> cantJugadores;
 
         if (cantJugadores >= 2)
         {
-            for (int i = 0; i < cantJugadores; i++)         ///O(n)
+            for (int i = 0; i < cantJugadores; i++) /// O(n)
             {
                 cout << "Jugador " << i + 1 << endl;
                 cout << "Ingrese su nombre: ";
-                cin >> nombre;                             /// O(1)
+                cin >> nombre; /// O(1)
 
                 listTurno.encolar(new Persona(nombre, 0));
             }
@@ -65,7 +64,6 @@ void Jugar::crearJugadores()
 }
 /// Caso optimo O(n)
 /// Caso peor O(n)
-
 
 void Jugar::lecturaArchivo()
 {
@@ -189,10 +187,11 @@ void Jugar::turnoJugador()
 
         if (jugador)
         {
-            cout << "Turno de " << jugador->getNombre() <<", Con un Punteo de: "<< jugador->getPunteo() << endl;
-            cout <<" Sus fichas son: "<<endl;
+            cout << "Turno de " << jugador->getNombre() << ", Con un Punteo de: " << jugador->getPunteo() << endl;
+            cout << " Sus fichas son: " << endl;
 
-            if (jugador->getFichas()->getSize() != 0){
+            if (jugador->getFichas()->getSize() != 0)
+            {
 
                 jugador->imprimirFichas();
                 cout << "Seleccione una ficha: ";
@@ -206,26 +205,35 @@ void Jugar::turnoJugador()
                     cout << "Ficha seleccionada: " << ficha->getLetra() << endl;
                     cout << "Ingrese la posición (x, y): ";
                     int x, y;
+
                     cin >> x >> y;
 
-                    if (tablero.setFicha(x, y, ficha))
-                    { 
-                        jugador->getFichas()->eliminar(ficha);
-                        /// analizar palabra
-                        string tmpPalabraH= tablero.analizarH(x, y);
-                        string tmpPalabraV= tablero.analizarV(x, y);
+                    if (x >= 0 && x < 15 && y >= 0 && y < 15)
+                    {
 
-                        if ( listaPalabra.buscar(tmpPalabraH)){
-                            jugador->setPunteo(tablero.getPunteoH());
+                        if (tablero.setFicha(x, y, ficha))
+                        {
+                            jugador->getFichas()->eliminar(ficha);
+                            /// analizar palabra
+                            string tmpPalabraH = tablero.analizarH(x, y);
+                            string tmpPalabraV = tablero.analizarV(x, y);
+
+                            if (listaPalabra.buscar(tmpPalabraH))
+                            {
+                                jugador->setPunteo(tablero.getPunteoH());
+                            }
+
+                            if (listaPalabra.buscar(tmpPalabraV))
+                            {
+                                jugador->setPunteo(tablero.getPunteoV());
+                            }
                         }
 
-                        if ( listaPalabra.buscar(tmpPalabraV)){
-                            jugador->setPunteo(tablero.getPunteoV());
-                        }
+                        tablero.imprimirTablero();
+                        listTurno.moverFrenteFinal(); // Avanzar turno
+                    }else {
+                        cout << " Error: Posición inválida, ingrese del 0 al 14." << endl;
                     }
-
-                    tablero.imprimirTablero();
-                    listTurno.moverFrenteFinal(); // Avanzar turno
                 }
                 else
                 {
